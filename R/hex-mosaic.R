@@ -64,7 +64,7 @@ image_hex_mosaic <- function(
     ) +
     ggplot2::scale_fill_identity() +
     ggplot2::scale_x_continuous(limits = c(0, info$width), expand = c(0, 0)) +
-    ggplot2::scale_y_reverse(limits = c(info$height, 0), expand = c(0, 0)) +
+    ggplot2::scale_y_reverse(limits = c(0, info$height), expand = c(0, 0)) +
     ggplot2::coord_fixed() +
     .plot_background_theme(background)
 

@@ -170,8 +170,8 @@ write_ascii_art <- function(x, path, overwrite = FALSE) {
   }
   p +
     ggplot2::scale_x_continuous(limits = c(0.5, width + 0.5), expand = c(0, 0)) +
-    ggplot2::scale_y_reverse(limits = c(height + 0.5, 0.5), expand = c(0, 0)) +
-    ggplot2::coord_fixed(ratio = 0.5) +
+    ggplot2::scale_y_reverse(limits = c(0.5, height + 0.5), expand = c(0, 0)) +
+    ggplot2::coord_fixed(ratio = 2) +
     .plot_background_theme(background)
 }
 

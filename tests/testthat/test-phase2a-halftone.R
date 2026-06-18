@@ -6,6 +6,10 @@ test_that("halftone supports grayscale, color, and cmyk modes", {
   expect_s3_class(gray, "image_art")
   expect_equal(gray$type, "halftone")
   expect_s3_class(gray$plot, "ggplot")
+  out <- tempfile(fileext = ".png")
+  expect_invisible(save_image_art(gray, out, width = 2, height = 1.2, overwrite = TRUE))
+  pixels <- magick::image_data(magick::image_read(out), channels = "rgb")
+  expect_true(any(as.integer(pixels) < 250))
 
   color <- image_halftone(path, cell_size = 8, mode = "color", shape = "square")
   expect_s3_class(color, "image_art")

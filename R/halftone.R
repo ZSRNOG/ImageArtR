@@ -163,21 +163,20 @@ image_halftone <- function(
       ggplot2::scale_color_identity() +
       ggplot2::scale_linewidth_identity()
   } else {
-    point_shape <- if (identical(shape, "square")) 22 else 21
+    point_shape <- if (identical(shape, "square")) 15 else 16
     p <- base +
       ggplot2::geom_point(
-        ggplot2::aes(size = size, fill = hex),
+        ggplot2::aes(size = size, color = hex),
         shape = point_shape,
-        color = NA,
         alpha = if (identical(mode, "cmyk")) 0.65 else 1
       ) +
-      ggplot2::scale_fill_identity() +
+      ggplot2::scale_color_identity() +
       ggplot2::scale_size_identity()
   }
 
   p +
     ggplot2::scale_x_continuous(limits = c(0, width), expand = c(0, 0)) +
-    ggplot2::scale_y_reverse(limits = c(height, 0), expand = c(0, 0)) +
+    ggplot2::scale_y_reverse(limits = c(0, height), expand = c(0, 0)) +
     ggplot2::coord_fixed() +
     .plot_background_theme(background)
 }

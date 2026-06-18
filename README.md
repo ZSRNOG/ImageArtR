@@ -77,21 +77,21 @@ save_image_art(image_ascii_art(img, width = 70), "ascii-art.txt", overwrite = TR
 
 ## Gallery
 
-The gallery below was generated from the package example image with
+The gallery below was generated from the package's cartoon pig example image with
 `ImageArtR` functions. The images are saved in
 [`gallery/readme`](gallery/readme).
 
 | Stipple | Halftone |
 | --- | --- |
-| ![Stipple art](gallery/readme/01_stipple.png) | ![Halftone art](gallery/readme/02_halftone.png) |
+| <img src="gallery/readme/01_stipple.png" alt="Stipple art" width="360"> | <img src="gallery/readme/02_halftone.png" alt="Halftone art" width="360"> |
 
 | Hex mosaic | Pop art |
 | --- | --- |
-| ![Hex mosaic](gallery/readme/03_hex_mosaic.png) | ![Pop art](gallery/readme/04_pop_art.png) |
+| <img src="gallery/readme/03_hex_mosaic.png" alt="Hex mosaic" width="360"> | <img src="gallery/readme/04_pop_art.png" alt="Pop art" width="360"> |
 
 | Duotone | ASCII art |
 | --- | --- |
-| ![Duotone](gallery/readme/05_duotone.png) | ![ASCII art](gallery/readme/06_ascii.png) |
+| <img src="gallery/readme/05_duotone.png" alt="Duotone" width="360"> | <img src="gallery/readme/06_ascii.png" alt="ASCII art" width="360"> |
 
 ## Main Functions
 
