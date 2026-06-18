@@ -1,0 +1,30 @@
+---
+title: "Stippling and Halftone"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Stippling and Halftone}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Stippling samples more points from dark areas. Halftone uses a regular grid and
+maps darker cells to larger marks.
+
+```{r}
+library(ImageArtR)
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+
+stipple <- image_stipple_art(img, n = 3000, color = "original", seed = 123)
+halftone <- image_halftone(img, cell_size = 10, mode = "color")
+
+plot(stipple)
+plot(halftone)
+```
+
+Recommended ranges: 2,000-10,000 stipple points for medium images, and 6-16
+pixel halftone cells. Very high point counts are good candidates for future
+Rcpp sampling helpers.

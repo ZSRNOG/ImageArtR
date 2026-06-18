@@ -1,0 +1,35 @@
+test_that("image_artify dispatches to phase 2A styles", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 26, height = 18)
+  styles <- list_art_styles()
+  expect_s3_class(styles, "tbl_df")
+  expect_true(all(c("stipple", "halftone", "hex_mosaic", "pop_art", "duotone", "ascii") %in% styles$style))
+
+  expect_s3_class(image_artify(path, type = "stipple", n = 30, seed = 1), "image_art")
+  expect_s3_class(image_artify(path, type = "halftone", cell_size = 8), "image_art")
+  expect_s3_class(image_artify(path, type = "hex_mosaic", hex_size = 5), "image_art")
+  expect_s3_class(image_artify(path, type = "pop_art", panels = 1), "image_art")
+  expect_s3_class(image_artify(path, type = "duotone"), "image_art")
+  expect_s3_class(image_artify(path, type = "ascii", width = 12), "image_art")
+  expect_error(image_artify(path, type = "lowpoly"), "circle")
+})
+
+test_that("save_image_art supports overwrite and ASCII text/html", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 20, height = 14)
+  ascii <- image_ascii_art(path, width = 12)
+  txt <- tempfile(fileext = ".txt")
+  html <- tempfile(fileext = ".html")
+  png <- tempfile(fileext = ".png")
+
+  expect_invisible(save_image_art(ascii, txt))
+  expect_invisible(save_image_art(ascii, html))
+  expect_true(file.exists(txt))
+  expect_true(file.exists(html))
+  expect_error(save_image_art(ascii, txt), "already exists")
+  expect_invisible(save_image_art(ascii, txt, overwrite = TRUE))
+
+  stipple <- image_stipple_art(path, n = 25, seed = 1)
+  expect_invisible(save_image_art(stipple, png, width = 2, height = 1.5))
+  expect_error(save_image_art(stipple, tempfile(fileext = ".txt")), "Only ASCII")
+})

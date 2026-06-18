@@ -1,0 +1,26 @@
+---
+title: "Geometric Mosaics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geometric Mosaics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+`image_hex_mosaic()` creates a regular hexagon grid and samples colors from each
+cell.
+
+```{r}
+library(ImageArtR)
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+
+hex <- image_hex_mosaic(img, hex_size = 12, color_method = "mean")
+plot(hex)
+```
+
+Use `color_method = "center"` for speed, and `mean` or `median` for smoother
+color summaries.

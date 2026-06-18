@@ -1,0 +1,24 @@
+---
+title: "Performance"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Performance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Large images should be downsampled before art conversion. Each transformation
+has a `max_dimension` argument.
+
+```{r}
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+system.time(image_mosaic_art(img, tile_size = 12, max_dimension = 800))
+system.time(image_circle_art(img, n = 1000, color_method = "center", max_dimension = 700))
+```
+
+The pure-R Canny approximation and circle mean/median sampling are intentionally
+portable. Future compiled code could optimize those hotspots.

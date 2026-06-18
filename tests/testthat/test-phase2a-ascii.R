@@ -1,0 +1,30 @@
+test_that("ascii art returns text, ggplot, and html data", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 32, height = 20)
+  text <- image_ascii_art(path, width = 20, output = "text")
+  plot <- image_ascii_art(path, width = 20, output = "ggplot", color = TRUE)
+  html <- image_ascii_art(path, width = 20, output = "html", charset = "blocks")
+
+  expect_s3_class(text, "image_art")
+  expect_equal(text$type, "ascii")
+  expect_equal(length(text$processed$lines[1]), 1)
+  expect_s3_class(plot$plot, "ggplot")
+  expect_match(html$processed$html, "<!doctype html>")
+})
+
+test_that("ascii helpers write files and validate arguments", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 2, height = 2, transparent = TRUE)
+  result <- image_ascii_art(path, width = 4, charset = "custom", custom_chars = "01")
+  expect_output(print_ascii_art(result), "[01]")
+
+  txt <- tempfile(fileext = ".txt")
+  html <- tempfile(fileext = ".html")
+  expect_invisible(write_ascii_art(result, txt))
+  expect_invisible(write_ascii_art(result, html))
+  expect_true(file.exists(txt))
+  expect_true(file.exists(html))
+  expect_error(write_ascii_art(result, txt), "already exists")
+  expect_error(image_ascii_art(path, width = 0), "width")
+  expect_error(image_ascii_art(path, charset = "custom", custom_chars = "x"), "custom_chars")
+})

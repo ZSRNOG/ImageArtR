@@ -1,0 +1,20 @@
+test_that("duotone creates raster image in RGB and Lab spaces", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 30, height = 20)
+  rgb <- image_duotone(path, colorspace = "RGB")
+  lab <- image_duotone(path, colorspace = "Lab", midpoint = 0.4)
+  expect_s3_class(rgb, "image_art")
+  expect_equal(rgb$type, "duotone")
+  expect_s3_class(rgb$image, "magick-image")
+  expect_s3_class(lab, "image_art")
+})
+
+test_that("duotone validates arguments and handles alpha and extreme aspect", {
+  testthat::skip_if_not_installed("magick")
+  transparent <- make_test_image(width = 16, height = 16, transparent = TRUE)
+  wide <- make_test_image(width = 90, height = 8, grayscale = TRUE)
+  expect_s3_class(image_duotone(transparent, preserve_alpha = TRUE), "image_art")
+  expect_s3_class(image_duotone(wide, gamma = 0.8, contrast = 1.3), "image_art")
+  expect_error(image_duotone(wide, midpoint = 2), "midpoint")
+  expect_error(image_duotone(wide, shadow = "not-a-color"), "shadow")
+})

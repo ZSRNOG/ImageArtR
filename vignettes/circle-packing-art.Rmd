@@ -1,0 +1,24 @@
+---
+title: "Circle Packing Art"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Circle Packing Art}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Circle packing art uses `packcircles::circleProgressiveLayout()` and samples
+colors from the source image.
+
+```{r}
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+circle <- image_circle_art(img, n = 800, color_method = "center", seed = 123)
+plot(circle)
+```
+
+`color_method = "mean"` and `"median"` estimate colors over each covered region
+and are more expensive than center sampling.

@@ -1,0 +1,27 @@
+---
+title: "ASCII Art"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ASCII Art}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+ASCII art rescales the source image to a character grid and maps brightness to
+character density.
+
+```{r}
+library(ImageArtR)
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+
+ascii <- image_ascii_art(img, width = 70)
+print_ascii_art(ascii)
+write_ascii_art(ascii, "example-ascii.txt")
+
+ascii_plot <- image_ascii_art(img, width = 70, color = TRUE, output = "ggplot")
+plot(ascii_plot)
+```

@@ -1,0 +1,21 @@
+---
+title: "Palette Extraction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Palette Extraction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Palette extraction clusters source pixels and reports color frequency.
+
+```{r}
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+pal <- extract_image_palette(img, n = 8, colorspace = "Lab")
+pal
+plot_image_palette(pal)
+```

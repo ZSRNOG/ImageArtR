@@ -1,0 +1,22 @@
+---
+title: "Mosaic Art"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mosaic Art}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Mosaics divide an image into regular tiles and summarize each tile color.
+
+```{r}
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+square <- image_mosaic_art(img, tile_size = 10, shape = "square")
+hex <- image_mosaic_art(img, tile_size = 14, shape = "hexagon", palette_size = 12)
+plot(square)
+plot(hex)
+```

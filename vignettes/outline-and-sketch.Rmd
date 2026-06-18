@@ -1,0 +1,25 @@
+---
+title: "Outlines and Sketches"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Outlines and Sketches}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+ImageArtR includes Sobel, Laplacian, and approximate Canny-style outlines, plus
+line, pencil, and cartoon sketch styles.
+
+```{r}
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+outline <- image_outline(img, method = "canny")
+pencil <- image_sketch(img, style = "pencil")
+cartoon <- image_sketch(img, style = "cartoon")
+plot(outline)
+plot(pencil)
+plot(cartoon)
+```

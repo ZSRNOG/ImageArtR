@@ -1,0 +1,14 @@
+^data-raw$
+^cran-comments\.md$
+^\.git$
+^\.github$
+^README\.Rmd$
+^lintr$
+^\.lintr$
+^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$
+^ImageArtR_.*\.tar\.gz$
+^ImageArtR\.Rcheck$
+^_pkgdown\.yml$
+^demo-local$
+^gallery$

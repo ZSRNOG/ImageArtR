@@ -1,0 +1,27 @@
+---
+title: "Pop Art and Duotone"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pop Art and Duotone}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+Pop art posterizes luminance into a few saturated colors. Duotone interpolates
+tones between two chosen colors.
+
+```{r}
+library(ImageArtR)
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+
+list_pop_art_palettes()
+pop <- image_pop_art(img, panels = 4, seed = 123)
+duo <- image_duotone(img, shadow = "#172A3A", highlight = "#F4D35E", colorspace = "Lab")
+
+plot(pop)
+plot(duo)
+```

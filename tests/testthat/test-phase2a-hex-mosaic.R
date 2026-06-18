@@ -1,0 +1,22 @@
+test_that("hex mosaic returns regular polygon data", {
+  testthat::skip_if_not_installed("magick")
+  path <- make_test_image(width = 42, height = 24)
+  result <- image_hex_mosaic(path, hex_size = 6, color_method = "center")
+  expect_s3_class(result, "image_art")
+  expect_equal(result$type, "hex_mosaic")
+  expect_s3_class(result$plot, "ggplot")
+  expect_true(all(c("hexes", "vertices") %in% names(result$processed)))
+  expect_true(nrow(result$processed$vertices) >= 6)
+})
+
+test_that("hex mosaic supports color summaries and validation", {
+  testthat::skip_if_not_installed("magick")
+  tiny <- make_test_image(width = 3, height = 3, transparent = TRUE)
+  wide <- make_test_image(width = 80, height = 8)
+  expect_s3_class(image_hex_mosaic(tiny, hex_size = 2, color_method = "mean"), "image_art")
+  expect_s3_class(image_hex_mosaic(wide, hex_size = 5, color_method = "median"), "image_art")
+  limited <- image_hex_mosaic(wide, hex_size = 5, palette_size = 3)
+  expect_lte(length(unique(limited$processed$hexes$hex)), 3)
+  expect_error(image_hex_mosaic(wide, hex_size = 0), "hex_size")
+  expect_error(image_hex_mosaic(wide, color_method = "bad"), "color_method")
+})

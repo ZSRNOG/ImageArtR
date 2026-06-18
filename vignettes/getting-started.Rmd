@@ -1,0 +1,24 @@
+---
+title: "Getting Started with ImageArtR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with ImageArtR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+ImageArtR converts ordinary images into artistic graphics while keeping a
+consistent object structure.
+
+```{r}
+library(ImageArtR)
+
+img <- read_art_image(system.file("extdata", "example.png", package = "ImageArtR"))
+mosaic <- image_mosaic_art(img, tile_size = 12)
+plot(mosaic)
+save_image_art(mosaic, "mosaic.png")
+```

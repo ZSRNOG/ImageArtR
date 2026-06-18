@@ -1,0 +1,30 @@
+url: https://example.com/ImageArtR
+template:
+  bootstrap: 5
+reference:
+  - title: Input and preprocessing
+    contents:
+      - read_art_image
+      - preprocess_image
+  - title: Art styles
+    contents:
+      - image_circle_art
+      - image_mosaic_art
+      - image_hex_mosaic
+      - image_stipple_art
+      - image_halftone
+      - image_pop_art
+      - image_duotone
+      - image_ascii_art
+      - image_outline
+      - image_sketch
+  - title: Palettes, saving, and utilities
+    contents:
+      - extract_image_palette
+      - plot_image_palette
+      - image_artify
+      - list_art_styles
+      - list_pop_art_palettes
+      - save_image_art
+      - print_ascii_art
+      - write_ascii_art

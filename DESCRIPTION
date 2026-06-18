@@ -1,0 +1,36 @@
+Package: ImageArtR
+Title: Turn Images into Artistic Graphics
+Version: 0.1.0
+Authors@R: c(
+    person("Zhou", "Shirong", role = c("aut", "cre"),
+           email = "zsrnog@yeah.net")
+  )
+Description: Provides a consistent set of tools for reading, preprocessing,
+    transforming, plotting, and saving images as circle packing art, mosaics,
+    outlines, sketches, cartoons, and color palettes. Functions return a common
+    S3 object so results can be printed, plotted, summarized, and saved with a
+    unified interface.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+    R (>= 4.1.0)
+Imports:
+    dplyr,
+    ggplot2,
+    imager,
+    magick,
+    packcircles,
+    purrr,
+    rlang,
+    scales,
+    tibble,
+    tidyr
+Suggests:
+    devtools,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
