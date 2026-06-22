@@ -7,6 +7,8 @@ test_that("palette extraction returns expected columns and plot", {
     "hex", "red", "green", "blue", "hue", "saturation", "value",
     "frequency", "proportion", "colorspace"
   ) %in% names(pal)))
+  expect_true(all(pal$value >= 0 & pal$value <= 1))
+  expect_gt(max(pal$value), 0.5)
   expect_s3_class(plot_image_palette(pal), "ggplot")
 })
 

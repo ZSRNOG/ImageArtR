@@ -16,7 +16,7 @@
 }
 
 .rgb_to_hsv_table <- function(red, green, blue) {
-  hsv <- grDevices::rgb2hsv(red / 255, green / 255, blue / 255)
+  hsv <- grDevices::rgb2hsv(red, green, blue, maxColorValue = 255)
   tibble::tibble(
     hue = as.numeric(hsv["h", ]),
     saturation = as.numeric(hsv["s", ]),
@@ -96,7 +96,7 @@
 }
 
 .adjust_saturation <- function(red, green, blue, saturation = 1) {
-  hsv <- grDevices::rgb2hsv(red / 255, green / 255, blue / 255)
+  hsv <- grDevices::rgb2hsv(red, green, blue, maxColorValue = 255)
   hsv["s", ] <- pmin(1, pmax(0, hsv["s", ] * saturation))
   rgb <- grDevices::hsv(hsv["h", ], hsv["s", ], hsv["v", ])
   t(grDevices::col2rgb(rgb))

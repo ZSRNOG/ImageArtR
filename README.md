@@ -112,6 +112,7 @@ The gallery below was generated from the package's cartoon pig example image wit
 - `extract_image_palette()` and `plot_image_palette()`: dominant color
   extraction and palette visualization.
 - `image_artify()`: unified style dispatcher.
+- `image_style_grid()`: compare several styles for one image in a labeled grid.
 - `batch_image_artify()`: sequential batch conversion with success/error logs.
 - `save_image_art()`: save `image_art` objects to graphics, text, or HTML.
 
@@ -132,6 +133,18 @@ styles <- list(
 )
 
 lapply(styles, plot)
+```
+
+Compare several styles in one view:
+
+```r
+grid <- image_style_grid(
+  img,
+  styles = c("original", "stipple", "halftone", "hex_mosaic", "duotone", "ascii"),
+  options = list(stipple = list(n = 3000), ascii = list(width = 72))
+)
+
+plot(grid)
 ```
 
 Unified dispatch works the same way:

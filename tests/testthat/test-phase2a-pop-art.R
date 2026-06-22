@@ -30,3 +30,9 @@ test_that("pop art palette listing, image palette, validation, and seeds work", 
   expect_error(image_pop_art(path, panels = 3), "panels")
   expect_error(image_pop_art(path, levels = 1), "levels")
 })
+
+test_that("saturation adjustment keeps HSV value on the correct scale", {
+  adjusted <- .adjust_saturation(180, 120, 60, saturation = 1)
+  expect_equal(as.integer(adjusted[1, ]), c(180L, 120L, 60L))
+  expect_gt(max(adjusted), 100)
+})
